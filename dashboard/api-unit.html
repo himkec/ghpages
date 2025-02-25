@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Unit - Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <style>
+        /* Same styles as index.html */
+        .navbar { border-bottom: 1px solid #f5f5f5; }
+        .sidebar {
+            height: 100vh;
+            background: linear-gradient(135deg, #3273dc, #00d1b2);
+            color: white;
+            padding-top: 2rem;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+        .menu-list a {
+            color: white;
+            border-radius: 4px;
+            margin: 0.5rem 1rem;
+            padding: 0.75rem;
+            transition: all 0.3s;
+        }
+        .menu-list a:hover { background-color: rgba(255,255,255,0.2); color: white; }
+        .menu-list a.is-active { background-color: rgba(255,255,255,0.3); font-weight: bold; }
+        .submenu a { margin-left: 2rem; font-size: 0.9em; }
+        .chart-container { padding: 1.5rem; max-width: 600px; }
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="index.html"><strong>Dashboard</strong></a>
+    </div>
+</nav>
+<div class="columns is-mobile">
+    <div class="column is-2 sidebar">
+        <aside class="menu">
+            <ul class="menu-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="ui.html">UI</a>
+                    <ul class="submenu">
+                        <li><a href="ui-unit.html">Unit</a></li>
+                        <li><a href="ui-integration.html">Integration</a></li>
+                    </ul>
+                </li>
+                <li><a href="api.html">API</a>
+                    <ul class="submenu">
+                        <li><a class="is-active" href="api-unit.html">Unit</a></li>
+                        <li><a href="api-integration.html">Integration</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">CLI Tests</a></li>
+            </ul>
+        </aside>
+    </div>
+    <div class="column">
+        <div class="columns is-multiline">
+            <div class="column is-6">
+                <div class="card chart-container">
+                    <div class="card-content">
+                        <h2 class="subtitle">API Unit Tests (Polar Area)</h2>
+                        <canvas id="polarChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+        const polarCtx = document.getElementById('polarChart').getContext('2d');
+        new Chart(polarCtx, {
+            type: 'polarArea',
+            data: {
+                labels: ['Endpoint A', 'Endpoint B', 'Endpoint C', 'Endpoint D'],
+                datasets: [{
+                    data: [95, 88, 92, 85],
+                    backgroundColor: ['#00d1b2', '#3273dc', '#ffdd57', '#ff3860']
+                }]
+            },
+            options: { responsive: true }
+        });
+    </script>
+</body>
+</html>
